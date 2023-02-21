@@ -1,5 +1,5 @@
 # ServerVBS
-ServerVBS is a static webserver program that is executed by a VBScript file. It uses TinyWeb by Maxim Masiutin as its kernel.
+ServerVBS is a static webserver program that is executed by a VBScript file. It uses TinyWeb by Maxim Masiutin as its hearthpiece.
 
 ## Installation
 To install ServerVBS, simply download the files from GitHub and run Server.vbs in the main folder. The program will ask if you want to download and install the missing files (`TinyWeb.exe`, `TinySSL.exe`, `Libeay32.dll`, and `Libssl32.dll`) to the `/bin` folder. If you confirm, the files will be downloaded and installed automatically. Otherwise, you can manually install the files to the bin folder in the main folder.
