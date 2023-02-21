@@ -1,0 +1,1 @@
+WScript.Echo "This is the /cgi-bin/index.vbs"

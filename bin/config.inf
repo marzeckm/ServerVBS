@@ -1,0 +1,4 @@
+homepath:./www
+port:80
+ssl:no
+language:en
