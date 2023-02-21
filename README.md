@@ -23,8 +23,8 @@ When the server is started, you can use the following commands:
 `restart`: restart the server.  
 
 ## Credits
-This program is based on the work of Maxim Masiutin, who developed TinyWeb. (http://www.ritlabs.com/en/products/tinyweb/)  
-`Libeay32.dll` and `Libssl32.dll` from OpenSSL, distributed under the Apache License 2.0.
+This program is based on the work by RITLABS S.R.L. (Maxim Masiutin), who developed TinyWeb. (http://www.ritlabs.com/en/products/tinyweb/)  
+`Libeay32.dll` and `Libssl32.dll` are from OpenSSL, distributed under the Apache License 2.0.
 
 ## Requirements
 - Windows 7, Windows Server 2008 R2, Windows 8, Windows 8.1, Windows Server 2012, Windows 10, Windows Server 2016, Windows Server 2019, Windows 11, Windows Server 2022  
