@@ -9,25 +9,25 @@ You can add HTTPS support by adding a `key.pem` and a `cert.pem` file to the bin
 ## Configuration
 You can configure ServerVBS by changing the settings in the `/bin/config.inf` file, located in the bin folder. The available settings are:
 
-`port`: the port number to listen on (default is `80`).
-`ssl`: whether to enable SSL (default is `no`).
-`language`: the language to use for error messages (default is English (`en`), but German (`de`) is also available).
-`homepath`: the root directory of your website (default is `./www`).
+`port`: the port number to listen on (default is `80`).  
+`ssl`: whether to enable SSL (default is `no`).  
+`language`: the language to use for error messages (default is English (`en`), but German (`de`) is also available).  
+`homepath`: the root directory of your website (default is `./www`).  
 
 ## Usage
 When the server is started, you can use the following commands:
 
-`start`: start the server after it has been paused.
-`pause`: pause the server without closing the program.
-`stop`: stop the server and close the program.
-`restart`: restart the server.
+`start`: start the server after it has been paused.  
+`pause`: pause the server without closing the program.  
+`stop`: stop the server and close the program.  
+`restart`: restart the server.  
 
 ## Credits
-This program is based on the work of Maxim Masiutin, who developed TinyWeb. (http://www.ritlabs.com/en/products/tinyweb/)
+This program is based on the work of Maxim Masiutin, who developed TinyWeb. (http://www.ritlabs.com/en/products/tinyweb/)  
 `Libeay32.dll` and `Libssl32.dll` from OpenSSL, distributed under the Apache License 2.0.
 
 ## Requirements
-- Windows 7, Windows Server 2008 R2, Windows 8, Windows 8.1, Windows Server 2012, Windows 10, Windows Server 2016, Windows Server 2019, Windows 11, Windows Server 2022
+- Windows 7, Windows Server 2008 R2, Windows 8, Windows 8.1, Windows Server 2012, Windows 10, Windows Server 2016, Windows Server 2019, Windows 11, Windows Server 2022  
 - The execustion of VBScript must be activated. Many Antiviruses block the execution of VBScript.
 
 ## Contribute
