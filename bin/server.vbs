@@ -27,27 +27,27 @@ Class Server
             Set objShell = CreateObject("WScript.Shell")
 
             ' Check if the TinyWeb / TinySSL file exists
-            If Not objFSO.FileExists(strTinyWebPath) Then
+            If (objFSO.FileExists(strTinyWebPath) = False) Then
                 WScript.Echo objMain.strings.item(11) & strTinyWebPath
                 WScript.Quit
-            End If
-            
-            ' Use the shell object to start the TinyWeb process with the -c option to specify the config file
-            Set objTinyWeb = objShell.Exec(strTinyWebPath & serverValues)
-            WScript.Echo objMain.strings.item("12") & homePath
-
-            ' Wait a few seconds for the server to start up
-            WScript.Sleep 3000
-
-            If(strTinyWebPath = "./bin/TinySSL.exe") Then
-                WScript.Echo objMain.strings.item("13")
             Else
-                WScript.Echo objMain.strings.item("14")
+                ' Use the shell object to start the TinyWeb process with the -c option to specify the config file
+                Set objTinyWeb = objShell.Exec(strTinyWebPath & serverValues)
+                WScript.Echo objMain.strings.item("12") & homePath
+
+                ' Wait a few seconds for the server to start up
+                If (strTinyWebPath = "./bin/TinySSL.exe") Then
+                    WScript.Echo objMain.strings.item("14")
+                Else
+                    WScript.Echo objMain.strings.item("13")
+                End If
+                'Return that the Server could be started
+                startServer = true
             End If
-            startServer = true
         Else
             ' Prompt that the TinyWeb.exe was not found in the bin folder
             WScript.Echo objMain.strings.item(15) & vbCrLf & objMain.strings.item(16)
+            'Return that the Server could not be started
             startServer = false
         End If
     End Function

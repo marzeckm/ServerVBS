@@ -20,6 +20,7 @@ Class Main
         Set mySetup = New Setup
         Set myServer = New Server
         Set myConfig = mySetup.getConfig()
+        
         Set strings = New Language.initLang(myConfig.item("language"))
         serverMode = 0
 

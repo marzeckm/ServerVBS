@@ -17,9 +17,8 @@ Class Setup
         Dim config: Set config = CreateObject("Scripting.Dictionary")
         Dim file
 
-        ' Check if the config file exists
+        ' Check if the config file exists and opens it, when it exists
         If objFSO.FileExists("./bin/config.inf") Then
-            ' If it exists, open it
             Set file = objFSO.OpenTextFile("./bin/config.inf")
         Else 
             ' If it doesn't exist, try to create a default config file and opens it
