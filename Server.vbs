@@ -17,6 +17,8 @@ Class Main
 
     ' Initializes the Setup (with Config), the server and the language pack
     Sub main()
+        forceConsoleMode
+
         Set mySetup = New Setup
         Set myServer = New Server
         Set myConfig = mySetup.getConfig()
@@ -99,6 +101,32 @@ Class Main
         If serverMode = 1 Then
             myServer.stopServer
             serverMode = 0
+        End If
+    End Sub
+
+    ' Forces the application to run in CScript.exe
+    Public Sub forceConsoleMode()
+        Dim strArgs, strCmd, strEngine, i, objDebug, wshShell
+
+        Set wshShell = CreateObject( "WScript.Shell" )
+        strEngine = UCase( Right( WScript.FullName, 12 ) )
+
+        If strEngine <> "\CSCRIPT.EXE" Then
+            strArgs = ""
+            If WScript.Arguments.Count > 0 Then
+                For i = 0 To WScript.Arguments.Count - 1
+                    strArgs = strArgs & " " & WScript.Arguments(i)
+                Next
+            End If
+
+            strCmd = "CSCRIPT.EXE //NoLogo """ & WScript.ScriptFullName & """" & strArgs
+            Set objDebug = wshShell.Exec( strCmd )
+
+            Do While objDebug.Status = 0
+                WScript.Sleep 100
+            Loop
+
+            WScript.Quit objDebug.ExitCode
         End If
     End Sub
 End Class
