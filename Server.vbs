@@ -106,27 +106,17 @@ Class Main
 
     ' Forces the application to run in CScript.exe
     Public Sub forceConsoleMode()
-        Dim strArgs, strCmd, strEngine, i, objDebug, wshShell
+        Dim strCmd, strEngine, wshShell
 
         Set wshShell = CreateObject( "WScript.Shell" )
         strEngine = UCase( Right( WScript.FullName, 12 ) )
 
         If strEngine <> "\CSCRIPT.EXE" Then
-            strArgs = ""
-            If WScript.Arguments.Count > 0 Then
-                For i = 0 To WScript.Arguments.Count - 1
-                    strArgs = strArgs & " " & WScript.Arguments(i)
-                Next
-            End If
 
-            strCmd = "CSCRIPT.EXE //NoLogo """ & WScript.ScriptFullName & """" & strArgs
-            Set objDebug = wshShell.Exec( strCmd )
+            strCmd = "cscript.exe " & chr(34) & WScript.ScriptFullName & chr(34) & strArgs
+            wshShell.Run "cscript.exe Server.vbs"
 
-            Do While objDebug.Status = 0
-                WScript.Sleep 100
-            Loop
-
-            WScript.Quit objDebug.ExitCode
+            WScript.Quit
         End If
     End Sub
 End Class
