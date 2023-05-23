@@ -1,15 +1,14 @@
 Class Setup
-    ' Checks if a config.inf exists and creates one if no config.inf exists
-    Sub CheckConfigFile()
-        If Not objFSO.FileExists("./bin/config.inf") Then
-            Dim objFile
-            Set objFile = objFSO.CreateTextFile("./bin/config.inf")
-            objFile.WriteLine "homepath:./www"
-            objFile.WriteLine "port:80"
-            objFile.WriteLine "ssl:no"
-            objFile.WriteLine "language:en"
-            objFile.Close
+    ' Checks if a config.inf exists and creates one if no config.inf exists, otherwise it will first delete the old config
+    Sub setConfig(homepath, port, ssl, language)
+        If objFSO.FileExists("./bin/config.inf") Then
+            objFSO.DeleteFile("./bin/config.inf") 
         End If
+        
+        Dim objFile
+        Set objFile = objFSO.CreateTextFile("./bin/config.inf")
+        objFile.Write "homepath:" + homepath + vbCrLf + "port:" + port + vbCrLf + "ssl:" + ssl + vbCrLf + "language:" + language
+        objFile.Close
     End Sub
 
     Public Function getConfig()
@@ -22,7 +21,7 @@ Class Setup
             Set file = objFSO.OpenTextFile("./bin/config.inf")
         Else 
             ' If it doesn't exist, try to create a default config file and opens it
-            CheckConfigFile
+            setConfig "./www", "80", "no", "en"
             Set file = objFSO.OpenTextFile("./bin/config.inf")
         End if
 
