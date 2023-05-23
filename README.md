@@ -7,7 +7,7 @@ To install ServerVBS, simply download the files from GitHub and run Server.vbs i
 You can add HTTPS support by adding a `key.pem` and a `cert.pem` file to the bin folder. These files can be created with `OpenSSL`. To enable SSL, change the ssl setting in the `/bin/config.inf` file from `ssl:no` to `ssl:yes`.
 
 ## Configuration
-You can configure ServerVBS by changing the settings in the `/bin/config.inf` file, located in the bin folder. The available settings are:
+You can configure ServerVBS by calling `settings` in the main menu or by changing the settings in the `/bin/config.inf` file, located in the bin folder. The available settings are:
 
 `port`: the port number to listen on (default is `80`).  
 `ssl`: whether to enable SSL (default is `no`).  
@@ -21,6 +21,7 @@ When the server is started, you can use the following commands:
 `pause`: pause the server without closing the program.  
 `stop`: stop the server and close the program.  
 `restart`: restart the server.  
+`settings`: opens the settings for the server.  
 
 ## Credits
 - This program is based on the work by RITLABS S.R.L. (Maxim Masiutin), who developed TinyWeb. (http://www.ritlabs.com/en/products/tinyweb/)  
