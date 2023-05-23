@@ -83,6 +83,7 @@ Class Server
         Next
     End Function
 
+    ' Checks, if the files needed for HTTPS mode are available locally
     Public Function checkSslFile(filename)
         checkSslFile = True
         If (objFSO.FileExists(filename) = false) Then

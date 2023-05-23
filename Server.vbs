@@ -138,6 +138,7 @@ Class Main
     ' Sets the setting in the config file
     Public Sub setSetting(text_id, setting)
         WScript.Echo strings.item(text_id)
+
         Dim setting_content
         setting_content = LCase(WScript.StdIn.ReadLine)
 
@@ -173,6 +174,7 @@ Class Main
 
         If strEngine <> "\CSCRIPT.EXE" Then
             strArgs = ""
+            
             If WScript.Arguments.Count > 0 Then
                 For i = 0 To WScript.Arguments.Count - 1
                     strArgs = strArgs & " " & WScript.Arguments(i)
