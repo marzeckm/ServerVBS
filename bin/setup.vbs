@@ -64,16 +64,16 @@ Class Setup
     ' Checks if necessary files for HTTP and HTTPs Connections are installed in the bin folder
     Sub getServerExes()
         If (getFileSize("./bin/TinyWeb.exe") < 75000) Then
-            downloadFile "https://www.marzeck.de/ressourcen/downloads/servervbs/", "TinyWeb.exe"
+            downloadFile "https://www.marzeck.de/src/public/downloads/servervbs/", "TinyWeb.exe"
         End If
         If (getFileSize("./bin/TinySSL.exe") < 95000) Then
-            downloadFile "https://www.marzeck.de/ressourcen/downloads/servervbs/", "TinySSL.exe"
+            downloadFile "https://www.marzeck.de/src/public/downloads/servervbs/", "TinySSL.exe"
         End If
         If (getFileSize("./bin/libeay32.dll") < 1330000) Then
-            downloadFile "https://www.marzeck.de/ressourcen/downloads/servervbs/", "libeay32.dll"
+            downloadFile "https://www.marzeck.de/src/public/downloads/servervbs/", "libeay32.dll"
         End If
         If (getFileSize("./bin/libssl32.dll") < 260000) Then
-            downloadFile "https://www.marzeck.de/ressourcen/downloads/servervbs/", "libssl32.dll"
+            downloadFile "https://www.marzeck.de/src/public/downloads/servervbs/", "libssl32.dll"
         End If
     End Sub
 
