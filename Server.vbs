@@ -4,9 +4,15 @@
 Dim objFS0: Set objFSO = CreateObject("Scripting.FileSystemObject")
 Dim objMain: Set objMain = New Main
 
+' Import the languages
+objMain.includeFile "./src/constants/translation_en.vbs"
+objMain.includeFile "./src/constants/translation_de.vbs"
+
+' Import the needed classes
 objMain.includeFile "./bin/server.vbs"
 objMain.includeFile "./bin/setup.vbs"
-objMain.includeFile "./bin/languages.vbs"
+objMain.includeFile "./src/services/translate.service.vbs"
+
 
 Class Main
     Dim mySetup
@@ -23,7 +29,7 @@ Class Main
         Set myServer = New Server
         Set myConfig = mySetup.getConfig()
         
-        Set strings = New Language.initLang(myConfig.item("language"))
+        Set strings = New TranslateService.initLang(myConfig.item("language"))
         serverMode = 0
 
         ' Checks if the necessary exe and dll files are in their right place
@@ -39,24 +45,24 @@ Class Main
             showDivisionLine
 
             ' Checks which command was called by the user
-            Do While Not mainMenu = strings.item("2")
+            Do While Not mainMenu = strings.item("stop")
                 printMenu
                 mainMenu = LCase(WScript.StdIn.ReadLine)
 
                 Select Case mainMenu
-                    Case strings.item("0")
+                    Case strings.item("start")
                         serverStart
-                    Case strings.item("1")
+                    Case strings.item("pause")
                         serverStop
-                    Case strings.item("2")
+                    Case strings.item("stop")
                         serverStop
-                    Case strings.item("3")
+                    Case strings.item("restart")
                         serverStop
                         serverStart
-                    Case strings.item("26")
+                    Case strings.item("settings")
                         showSettings
                     Case Else
-                        WScript.Echo strings.item("4")
+                        WScript.Echo strings.item("unknown_command")
                 End Select
 
                 showDivisionLine
@@ -83,18 +89,18 @@ Class Main
 
     ' Prints the menu for the user
     Public Sub printMenu()
-        WScript.Echo strings.item("5") & vbCrLf & _
-            strings.item("6") & vbCrLf & _
-            strings.item("7") & vbCrLf & _
-            strings.item("8") & vbCrLf & _
-            strings.item("39") & vbCrLf
+        WScript.Echo strings.item("start_description") & vbCrLf & _
+            strings.item("pause_description") & vbCrLf & _
+            strings.item("stop_description") & vbCrLf & _
+            strings.item("restart_description") & vbCrLf & _
+            strings.item("settings_description") & vbCrLf
     End Sub
 
     ' Starting all the necessary steps to start the server if it is not started yet
     Public Sub serverStart()
         If serverMode = 0 Then
             Set myConfig = mySetup.getConfig()
-            Set strings = New Language.initLang(myConfig.item("language"))
+            Set strings = New TranslateService.initLang(myConfig.item("language"))
             myServer.startServer myConfig.item("homepath"), myConfig.item("port"), myConfig.item("ssl")
             serverMode = 1
         End If
@@ -114,25 +120,25 @@ Class Main
         printSettings
 
         Select case LCase(WScript.StdIn.ReadLine)
-            case strings.item("31")
-                setSetting "35", strings.item("31")
-            case strings.item("32")
-                setSetting "36", strings.item("32")
-            case strings.item("33")
-                setSetting "37", strings.item("33")
-            case strings.item("34")
-                setSetting "38", strings.item("34")
+            case strings.item("start_directory")
+                setSetting "set_start_directory_prompt", strings.item("start_directory")
+            case strings.item("port")
+                setSetting "set_port_prompt", strings.item("port")
+            case strings.item("ssl")
+                setSetting "set_ssl_prompt", strings.item("ssl")
+            case strings.item("language")
+                setSetting "set_language_prompt", strings.item("language")
             Case Else
-                WScript.Echo strings.item("4")
+                WScript.Echo strings.item("unknown_command")
         End Select
     End Sub
 
     ' Prints out the options for the settings
     public Sub printSettings()
-        WScript.Echo strings.item("27") & vbCrLf & _
-            strings.item("28") & vbCrLf & _
-            strings.item("29") & vbCrLf & _
-            strings.item("30") & vbCrLf 
+        WScript.Echo strings.item("set_start_directory_description") & vbCrLf & _
+            strings.item("set_port_description") & vbCrLf & _
+            strings.item("set_ssl_description") & vbCrLf & _
+            strings.item("set_language_description") & vbCrLf 
     End Sub
 
     ' Sets the setting in the config file
@@ -143,20 +149,20 @@ Class Main
         setting_content = LCase(WScript.StdIn.ReadLine)
 
         Select case setting
-            case strings.item("31") ' Set_Homepath
+            case strings.item("start_directory") ' Set_Homepath
                 mySetup.setConfig setting_content, myConfig.item("port"), myConfig.item("ssl"), myConfig.item("language")
-            case strings.item("32") ' Set_Port
+            case strings.item("port") ' Set_Port
                 If IsNumeric(setting_content) Then
                     mySetup.setConfig myConfig.item("homepath"), setting_content, myConfig.item("ssl"), myConfig.item("language")
                 End If
-            case strings.item("33") ' Set_SSL
-                If setting_content = strings.item("22") Or setting_content = strings.item("23") Then
+            case strings.item("ssl") ' Set_SSL
+                If setting_content = strings.item("yes_short") Or setting_content = strings.item("yes_long") Then
                     mySetup.setConfig myConfig.item("homepath"), myConfig.item("port"), "yes", myConfig.item("language")
                 Else
                     mySetup.setConfig myConfig.item("homepath"), myConfig.item("port"), "no", myConfig.item("language")
                 End If
-            case strings.item("34") ' Set_Language
-                If New Language.languageExists(setting_content) Then
+            case strings.item("language") ' Set_Language
+                If New TranslateService.languageExists(setting_content) Then
                     mySetup.setConfig myConfig.item("homepath"), myConfig.item("port"), myConfig.item("ssl"), setting_content
                 End If
         End Select

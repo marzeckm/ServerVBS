@@ -86,9 +86,9 @@ Class Setup
     End Function
 
     Sub downloadFile(url, filename)
-        WScript.Echo objMain.strings.item("18") & filename & objMain.strings.item("19") & vbCrLf & objMain.strings.item("20") & vbCrLf & objMain.strings.item("21")
+        WScript.Echo objMain.strings.item("file_needed") & filename & objMain.strings.item("file_needed_suffix") & vbCrLf & objMain.strings.item("internet_needed") & vbCrLf & objMain.strings.item("download_prompt")
         Dim allowInstall: allowInstall = LCase(WScript.StdIn.ReadLine)
-        If (allowInstall = objMain.strings.item("22") Or allowInstall = objMain.strings.item("23")) Then
+        If (allowInstall = objMain.strings.item("yes_short") Or allowInstall = objMain.strings.item("yes_long")) Then
             Dim http: Set http = CreateObject("MSXML2.XMLHTTP")
             Dim bStrm: Set bStrm = createobject("Adodb.Stream")
 
@@ -108,10 +108,10 @@ Class Setup
                 end with
 
                 ' Prints out a message, when the file was successfully downloaded
-                WScript.Echo objMain.strings.item("24") & savePath & vbCrLf
+                WScript.Echo objMain.strings.item("download_success") & savePath & vbCrLf
             Else
                 ' Prints out Text if the File could not be downloaded
-                WScript.Echo objMain.strings.item("25") & http.status & ")" & vbCrLf
+                WScript.Echo objMain.strings.item("download_error") & http.status & ")" & vbCrLf
             End If
         End If
     End Sub

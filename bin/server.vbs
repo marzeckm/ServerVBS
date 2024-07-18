@@ -9,7 +9,7 @@ Class Server
         
         ' Checks if the TinyWeb.exe and the TinySSL.exe are existing
         If (objFSO.FileExists("./bin/TinyWeb.exe") And objFSO.FileExists("./bin/TinySSL.exe")) Then
-            WScript.Echo objMain.strings.item("9") & port & objMain.strings.item("10")
+            WScript.Echo objMain.strings.item("server_start_port") & port & objMain.strings.item("server_started")
             Dim serverValues
             homePath = checkRootLocation(homePath)
             
@@ -28,25 +28,25 @@ Class Server
 
             ' Check if the TinyWeb / TinySSL file exists
             If (objFSO.FileExists(strTinyWebPath) = False) Then
-                WScript.Echo objMain.strings.item(11) & strTinyWebPath
+                WScript.Echo objMain.strings.item("no_executable") & strTinyWebPath
                 WScript.Quit
             Else
                 ' Use the shell object to start the TinyWeb process with the -c option to specify the config file
                 Set objTinyWeb = objShell.Exec(strTinyWebPath & serverValues)
-                WScript.Echo objMain.strings.item("12") & homePath
+                WScript.Echo objMain.strings.item("set_start_directory") & homePath
 
                 ' Wait a few seconds for the server to start up
                 If (strTinyWebPath = "./bin/TinySSL.exe") Then
-                    WScript.Echo objMain.strings.item("14")
+                    WScript.Echo objMain.strings.item("https_server_started")
                 Else
-                    WScript.Echo objMain.strings.item("13")
+                    WScript.Echo objMain.strings.item("http_server_started")
                 End If
                 'Return that the Server could be started
                 startServer = true
             End If
         Else
             ' Prompt that the TinyWeb.exe was not found in the bin folder
-            WScript.Echo objMain.strings.item(15) & vbCrLf & objMain.strings.item(16)
+            WScript.Echo objMain.strings.item("tinyweb_not_found") & vbCrLf & objMain.strings.item("tinyweb_needed")
             'Return that the Server could not be started
             startServer = false
         End If
@@ -88,7 +88,7 @@ Class Server
         checkSslFile = True
         If (objFSO.FileExists(filename) = false) Then
             checkSslFile = False
-            WScript.Echo objMain.strings.item("17") & filename
+            WScript.Echo objMain.strings.item("file_not_found") & filename
         End if
     End Function
 End Class
